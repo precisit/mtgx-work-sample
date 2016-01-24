@@ -1,0 +1,46 @@
+
+<div class="row">
+	<div class="moviebox" ng-repeat="item in content.items">
+		<div>
+			<a href="/web-se/{{content.category}}/{{item.publicPath}}">
+				<img ng-src="{{item.content.images.boxart.url}}">
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="product" ng-show="content.product">
+		<div class="trailer" ng-click="content.product.trailerFrame = content.product.trailerFrameClick || content.product.trailerFrame">
+			<div ng-bind-html="content.product.trailerFrame"></div>
+			<span ng-show="content.product.trailerFrameClick && content.product.trailerFrame != content.product.trailerFrameClick" class="glyphicon glyphicon-play-circle"></span>
+		</div>
+		<div class="description">
+		
+			<h1>{{content.product.content.title}}</h1>
+			<h3>
+				<span ng-repeat="genre in content.product._links['viaplay:genres']">{{genre.title}}{{ $last ? '' : '/' }}</span>
+				{{content.product.content.production.year}} {{content.product.content.duration.readable}}
+			</h3>
+			
+			<p>
+				<h4><img src="images/imdb.jpeg"> <span>{{content.product.content.imdb.rating}}</span> <span class="rating">från {{content.product.content.imdb.votes}} användare</span></h4>
+			</p>
+			<p>
+				{{content.product.content.synopsis}}<br>
+			</p>
+			<p>
+				<b>Skådespelare:</b> <a ng-repeat="actor in content.product.content.people.actors">{{actor}} </a><br>
+				<b>Regissör:</b> <a ng-repeat="director in content.product.content.people.directors">{{director}} </a><br>
+				<b>Land:</b> {{content.product.content.production.country}}
+			</p>
+			<p>
+				<span class="flag" ng-show="content.product.system.flags[0] == 'hd'">HD</span><span class="flag">{{content.product.content.parentalRating}}</span>
+			</p>
+			<p>
+				<button class="btn btn-default"><span class="glyphicon glyphicon-star"></span></button>
+			</p>
+		
+		</div>
+	</div>
+</div>
